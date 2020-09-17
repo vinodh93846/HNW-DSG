@@ -1,0 +1,22 @@
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+steps:
+  - script: bash startFabric.sh typescript
+    workingDirectory: dsg
+    displayName: Start Fabric
+  - script: retry -- npm install
+    workingDirectory: dsg/typescript
+    displayName: Install dsg application dependencies
+  - script: npm run build
+    workingDirectory: dsg/typescript
+    displayName: Build dsg application
+  - script: |
+      set -ex
+      node dist/enrollAdmin
+      node dist/registerUser
+      node dist/invoke
+      node dist/query
+    workingDirectory: dsg/typescript
+    displayName: Run dsg application

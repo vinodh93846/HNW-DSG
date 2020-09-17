@@ -1,0 +1,14 @@
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+steps:
+  - script: bash startFabric.sh java
+    workingDirectory: dsg
+    displayName: Start Fabric
+  - script: retry -- mvn dependency:go-offline
+    workingDirectory: dsg/java
+    displayName: Install dsg application dependencies
+  - script: mvn test
+    workingDirectory: dsg/java
+    displayName: Run dsg application

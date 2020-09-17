@@ -1,0 +1,99 @@
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+trigger:
+  - master
+  - release-1.4
+
+variables:
+  NODE_VER: '12.x'
+
+jobs:
+  - job: dsg_go
+    displayName: dsg (Go)
+    pool:
+      vmImage: ubuntu-18.04
+    dependsOn: []
+    timeoutInMinutes: 60
+    steps:
+      - template: install-deps.yml
+      - template: install-fabric.yml
+      - template: dsg-go.yml
+
+  - job: test_network
+    displayName: Start the test network
+    pool:
+      vmImage: ubuntu-18.04
+    dependsOn: []
+    timeoutInMinutes: 60
+    steps:
+      - template: install-deps.yml
+      - template: install-fabric.yml
+      - template: testnetwork.yml
+
+  - job: dsg_java
+    displayName: dsg (Java)
+    pool:
+      vmImage: ubuntu-18.04
+    dependsOn: []
+    timeoutInMinutes: 60
+    steps:
+      - template: install-deps.yml
+      - template: install-fabric.yml
+      - template: dsg-java.yml
+
+  - job: dsg_javascript
+    displayName: dsg (JavaScript)
+    pool:
+      vmImage: ubuntu-18.04
+    dependsOn: []
+    timeoutInMinutes: 60
+    steps:
+      - template: install-deps.yml
+      - template: install-fabric.yml
+      - template: dsg-javascript.yml
+
+  - job: dsg_typescript
+    displayName: dsg (TypeScript)
+    pool:
+      vmImage: ubuntu-18.04
+    dependsOn: []
+    timeoutInMinutes: 60
+    steps:
+      - template: install-deps.yml
+      - template: install-fabric.yml
+      - template: dsg-typescript.yml
+
+  - job: commercialpaper_javascript
+    displayName: CommercialPaper (JavaScript)
+    pool:
+      vmImage: ubuntu-18.04
+    dependsOn: []
+    timeoutInMinutes: 60
+    steps:
+      - template: install-deps.yml
+      - template: install-fabric.yml
+      - template: commercialpaper-javascript.yml
+
+  - job: commercialpaper_java
+    displayName: CommercialPaper (Java)
+    pool:
+      vmImage: ubuntu-18.04
+    dependsOn: []
+    timeoutInMinutes: 60
+    steps:
+      - template: install-deps.yml
+      - template: install-fabric.yml
+      - template: commercialpaper-java.yml
+
+  - job: commercialpaper_go
+    displayName: CommercialPaper (Go)
+    pool:
+      vmImage: ubuntu-18.04
+    dependsOn: []
+    timeoutInMinutes: 60
+    steps:
+      - template: install-deps.yml
+      - template: install-fabric.yml
+      - template: commercialpaper-go.yml
